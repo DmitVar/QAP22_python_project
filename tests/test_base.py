@@ -2,8 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 
-BASE_URL = 'http://localhost:3000'
-SUBSCRIPTION = f'{BASE_URL}/automation-lab/subscription'
+BASE_URL = "http://localhost:3000"
+SUBSCRIPTION = f"{BASE_URL}/automation-lab/subscription"
 
 
 def test_open_subscription():
@@ -14,8 +14,8 @@ def test_open_subscription():
 
     driver.get(SUBSCRIPTION)
 
-    assert driver.title == 'Task Management Board'
+    assert driver.title == "Task Management Board"
     assert driver.current_url == SUBSCRIPTION
 
-    element_payment_section = driver.find_element(By.CSS_SELECTOR, '.payment-section')
+    element_payment_section = driver.find_element(By.CSS_SELECTOR, ".payment-section")
     assert element_payment_section.is_displayed()
