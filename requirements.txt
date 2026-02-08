@@ -131,8 +131,6 @@ pytest-clarity==1.0.1
 pytest-dependency==0.6.0
 pytest-dotenv==0.5.2
 pytest-html==4.1.1
-pytest-xdist==3.8.0
-pytest-timeout==2.4.0
 pytest-metadata==3.1.1
 pytest-playwright==0.7.2
 pytest-playwright-visual-snapshot==0.2.3
