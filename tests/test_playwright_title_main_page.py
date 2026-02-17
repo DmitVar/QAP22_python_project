@@ -1,7 +1,7 @@
 from playwright.sync_api import Page, expect
 
 
-def test_title_main_page(page: Page):
+def test_title_main_page(playwright_page: Page):
     """
     Проверка наличия заголовка на главной странице
     Шаги:
@@ -10,6 +10,6 @@ def test_title_main_page(page: Page):
     Ожидаемый результат:
         1. Заголовок h2 главной страницы содержит текст Web Automation Torture Labдля автоматизаторов
     """
-    page.goto("http://localhost:3000/")
-    title = page.locator("h2")
+    playwright_page.goto("http://localhost:3000/")
+    title = playwright_page.locator("h2")
     expect(title).to_have_text("Web Automation Torture Labдля автоматизаторов")

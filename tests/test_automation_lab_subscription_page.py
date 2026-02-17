@@ -14,14 +14,14 @@ smoke_test_cases_promo_code = [
 class TestAutomationLabSubscriptionPage:
 
     @pytest.mark.parametrize("promo_code, tariff, period, expected", smoke_test_cases_promo_code)
-    def test_check_promo_code(self, page, promo_code, tariff, period, expected):
-        page.goto("http://localhost:3000/automation-lab/subscription")
-        period_1_button = page.locator('[data-testid="period-1"]')
-        period_3_button = page.locator('[data-testid="period-3"]')
-        period_12_button = page.locator('[data-testid="period-12"]')
-        basic_tariff_card = page.locator('[data-testid="tariff-basic"]')
-        premium_tariff_card = page.locator('[data-testid="tariff-premium"]')
-        family_tariff_card = page.locator('[data-testid="tariff-family"]')
+    def test_check_promo_code(self, playwright_page, promo_code, tariff, period, expected):
+        playwright_page.goto("http://localhost:3000/automation-lab/subscription")
+        period_1_button = playwright_page.locator('[data-testid="period-1"]')
+        period_3_button = playwright_page.locator('[data-testid="period-3"]')
+        period_12_button = playwright_page.locator('[data-testid="period-12"]')
+        basic_tariff_card = playwright_page.locator('[data-testid="tariff-basic"]')
+        premium_tariff_card = playwright_page.locator('[data-testid="tariff-premium"]')
+        family_tariff_card = playwright_page.locator('[data-testid="tariff-family"]')
 
         match period:
             case "1_month":
@@ -39,29 +39,29 @@ class TestAutomationLabSubscriptionPage:
             case "family":
                 family_tariff_card.click()
 
-        promo_code_input = page.locator('[data-testid="promo-input"]')
+        promo_code_input = playwright_page.locator('[data-testid="promo-input"]')
         promo_code_input.clear()
         promo_code_input.fill(promo_code)
 
-        apply_promo_button = page.locator('[data-testid="promo-apply-btn"]')
+        apply_promo_button = playwright_page.locator('[data-testid="promo-apply-btn"]')
         apply_promo_button.click()
-        promo_message_result = page.locator('[data-testid="promo-message"]')
+        promo_message_result = playwright_page.locator('[data-testid="promo-message"]')
         actual_message = promo_message_result.text_content()
         assert actual_message == expected
 
-    def test_add_card(self, page):
-        page.goto("http://localhost:3000/automation-lab/subscription")
-        card_number_input = page.locator('[data-testid="card-number"]')
+    def test_add_card(self, playwright_page):
+        playwright_page.goto("http://localhost:3000/automation-lab/subscription")
+        card_number_input = playwright_page.locator('[data-testid="card-number"]')
         card_number_input.clear()
         card_number_input.fill("4111 1111 1111 1111")
-        validity_period_input = page.locator('[data-testid="card-expiry"]')
+        validity_period_input = playwright_page.locator('[data-testid="card-expiry"]')
         validity_period_input.clear()
         validity_period_input.fill("0930")
-        cvv_card_input = page.locator('[data-testid="card-cvv"]')
+        cvv_card_input = playwright_page.locator('[data-testid="card-cvv"]')
         cvv_card_input.clear()
         cvv_card_input.fill("333")
-        pay_button = page.locator('[data-testid="pay-button"]')
+        pay_button = playwright_page.locator('[data-testid="pay-button"]')
         pay_button.click()
-        popup_title = page.locator("div.success-modal h3")
+        popup_title = playwright_page.locator("div.success-modal h3")
         popup_title_text = popup_title.text_content()
         assert popup_title_text == "Успешно!"
